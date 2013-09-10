@@ -58,7 +58,7 @@ h2. What We'll Cover
 
 There are six examples in total.
 
-The first one covers grabbing the headlines and points from Hackers News. The next one shows how to make the code less redundant. The third scrapes the New York Times front page since that presents more challenges than Hacker News. The fourth example shows how to use Ring and Enlive together. The fifth example shows how things like looping are achieved without writing any code into the markup. The sixth example shows that Enlive can do all the fancy template inheritance magic you might be used to if you're coming from Django or some other popular modern webframework.
+The first one covers grabbing the headlines and points from Hacker News. The next one shows how to make the code less redundant. The third scrapes the New York Times front page since that presents more challenges than Hacker News. The fourth example shows how to use Ring and Enlive together. The fifth example shows how things like looping are achieved without writing any code into the markup. The sixth example shows that Enlive can do all the fancy template inheritance magic you might be used to if you're coming from Django or some other popular modern webframework.
 
 h2. Clone This Repo
 
@@ -139,7 +139,7 @@ tutorial.scrape1=> (hn-points)
 ... output ...
 </pre>
 
-The last function takes the output of the two different functions and prints out the headline and score for each item on Hackers News. 
+The last function takes the output of the two different functions and prints out the headline and score for each item on Hacker News. 
 
 <pre class="console">
 tutorial.scrape1=> (print-headlines-and-points)
@@ -404,7 +404,7 @@ h2. Your Second Template - Looping
 
 A common operation when generating web pages is looping over some piece of HTML because you need to present a list of items to the user. People just love lists. How can Enlive create lists of HTML when there's no code in the template?! We'll get into this in this tutorial.
 
-If you don't have a Clojure REPL running start a new one with *lein repl* at the commandline from the tutorial repo's directory. Enter the following (if you're continuing from the previous tutorial you should should stop the Ring app for that tutorial first):
+If you don't have a Clojure REPL running start a new one with *lein repl* at the command line from the tutorial repo's directory. Enter the following (if you're continuing from the previous tutorial you should should stop the Ring app for that tutorial first):
 
 <pre class="console">
 tutorial.template1=> (.stop *server*)
@@ -505,7 +505,7 @@ Now that we have our selector <code>defsnippet</code> will look like the followi
         (set-attr :href href)))
 </pre>
 
-Snippets are like templates with two main differences. First, snippets take a selector. This means that they can match only specific parts of an HTML document. The function produced by a <code>defsnippet</code> returns transformed content, <i>not</i> a list of strings the way <code>deftemplate</code> does. This snippet destructures it's first argument (a hash-map) to extract the value of the keys <code>:text</code> and <code>:href</code>. We're also introduced to <code>do-></code>. This is a convenience, we often want to take the matched element and apply a series of transformations to it. In this case we want to set the content of the node as well as its href attribute.
+Snippets are like templates with two main differences. First, snippets take a selector. This means that they can match only specific parts of an HTML document. The function produced by a <code>defsnippet</code> returns transformed content, <i>not</i> a list of strings the way <code>deftemplate</code> does. This snippet destructures its first argument (a hash-map) to extract the value of the keys <code>:text</code> and <code>:href</code>. We're also introduced to <code>do-></code>. This is a convenience, we often want to take the matched element and apply a series of transformations to it. In this case we want to set the content of the node as well as its href attribute.
 
 Let's try out our snippet to see that it worked:
 
@@ -562,7 +562,7 @@ That's it. While we've seen some interesting features and while HTML and code se
 
 h2. Your Third Template - Template Inheritance
 
-We now have a basic working idea of how templates work in Enlive. Templates are simply functions. Now it's still unclear if there is any real advantages to the Enlive way. Hopefully in this tutorial we can prove it's immense power.
+We now have a basic working idea of how templates work in Enlive. Templates are simply functions. Now it's still unclear if there is any real advantages to the Enlive way. Hopefully in this tutorial we can prove its immense power.
 
 Start a REPL if you don't already have one running with *lein repl*. Type the following:
 
@@ -575,7 +575,7 @@ tutorial.template2=> (in-ns 'tutorial.template3)
 nil
 </pre>
 
-If you're not continuing from a previous tutorial you should ignore <code>(stop-app)</code> and you'll need to be more specific about your loading, use <code>(load "tutorial/template3")</code> instead.
+If you're not continuing from a previous tutorial you should ignore <code>(.stop *server*)</code> and you'll need to be more specific about your loading, use <code>(load "tutorial/template3")</code> instead.
 
 Point your favorite web browser to *http://localhost:8080/base.html*. You should see a fairly plain page. This is not a template. You can try opening up "*base.html*":src/tutorial/base.html as a file in your browser and see that it's identical to what is being served by Ring. Now point your browser at *http://localhost:8080/3col.html*. You should see another page that has a 3 column layout. Now point your browser at *http://localhost:8080/a*. The code required to do this follows:
 
@@ -587,7 +587,7 @@ Point your favorite web browser to *http://localhost:8080/base.html*. You should
 
 If you look at the markup for "*base.html*":src/tutorial/base.html and "*3col.html*":src/tutorial/3col.html you will see that there is not one line of code! So how did we magically put these two things together with so little code! Once you understand what's going, you'll see that template inheritance in Enlive is nothing more than combining some functions.
 
-Take a look at *http://localhost:8080/navs.html*. You should see some truly ugly nav bars ;) Now point your browser at *http://localhost:8080/b*. You can see it's easy to define a site wide layout, a 3 column middle main layout, and customize the contents of each column. Again there's absolute no code in the markup, only the following code is needed to construct this page:
+Take a look at *http://localhost:8080/navs.html*. You should see some truly ugly nav bars ;) Now point your browser at *http://localhost:8080/b*. You can see it's easy to define a site wide layout, a 3 column middle main layout, and customize the contents of each column. Again there's absolutely no code in the markup, only the following code is needed to construct this page:
 
 <pre>
 (defn viewb []
@@ -598,7 +598,7 @@ Take a look at *http://localhost:8080/navs.html*. You should see some truly ugly
                             :right navr})})))
 </pre>
 
-Pretty slick. Templating with Enlive is just writing some Clojure code. This is different from even the good HTML templating solutions out there- few give you the full power of the language.
+Pretty slick. Templating with Enlive is just writing some Clojure code. This is different from even the good HTML templating solutions out there - few give you the full power of the language.
 
 One last live example before we dive into the code. Point your browser at *http://localhost:8080/c/*. Huh, looks pretty much like b. Point your browser at *http://localhost:8080/c/reverse*. Notice something different?
 
@@ -644,7 +644,7 @@ h3. The Pages
 
 Now for the fun part. The pages are just functions no more and no less. The first page <code>viewa</code> is just rendering the base template with the title "View A" and setting the main block of the page to the 3 column snippet.
 
-The page <code>viewb</code> does pretty much the same thing but this time we've added some navs for flair. Notice how much this function looks like <code>viewb</code>.
+The page <code>viewb</code> does pretty much the same thing but this time we've added some navs for flair. Notice how much this function looks like <code>viewa</code>.
 
 <code>viewc</code> does pretty much the same thing but it checks to see if there is a parameter for reversing the navs. If present, the order of the navs is reversed.
 
@@ -667,7 +667,7 @@ h3. Template out of date
 Your templates do not automatically reload. When you make edits to your HTML or your template code I recommend running the following at the REPL:
 
 <pre>
-(load "your-library-name")
+(load "your_library_name")
 </pre>
 
 It's a minor annoyance for all the benefits you reap. It also wouldn't be too hard to create a system that reloaded templates (at least while in development mode) upon page refresh.
